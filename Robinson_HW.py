@@ -6,6 +6,13 @@ Created on Sun Nov 18 10:49:38 2018
 @author: Rodrigo Castro
 """
 
+
+'''
+This is an example of a python implementation of gradient descent
+for the computation graph assigned as homewok
+'''
+
+
 def main():
 
     import numpy as np
