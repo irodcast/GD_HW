@@ -10,11 +10,14 @@ def main():
 
     import numpy as np
     import matplotlib.pyplot as plt
+
     
+    #Define the values for x,y, and set alpha:
     x=3
     y=1
     alpha=2
     
+    #Set the initial for theta_0:
     theta=np.zeros((6,1))
     theta[0]=1
     theta[1]=-2
@@ -23,8 +26,10 @@ def main():
     theta[4]=-2
     theta[5]=3
     
+    #If you want to experiment and initialize the paramenters randomely use:
     #theta=np.random.randn(6,1)
-    
+ 
+    #Define the forward operations of the computation graph:
     def feedforward(x,y,theta):
         z1=np.tanh(theta[0]*x+theta[1])
         z2=np.tanh(theta[2]*x+theta[3])
@@ -32,7 +37,8 @@ def main():
         J=1/2*(yhat-y)**2
         
         return z1,z2,yhat,J
-    
+  
+    #Define the partial derivatives of J with respect to the parameters:
     def backprop(z1,z2,yhat,J):
         
         dJ=np.zeros((6,1))
@@ -55,9 +61,14 @@ def main():
         dJ[5]=dJ_dyhat*dyhat_dtheta5
           
         return dJ
-    
+ 
+    #We are going to store the values of J every time we update the parameters so we create an empty list:
     J_values=[]
+    
+    #Define the number of steps of gradient descent you want to perform:
     n=5
+    
+    #Gradient descent steps:
     for i in range(0,n):    
         print('theta='+str(theta))
         z1,z2,yhat,J=feedforward(x,y,theta)
@@ -66,7 +77,8 @@ def main():
         J_values.append(J)
         
         print('J'+str(J))
-        
+ 
+    #Visualize the change of J with respect of the parameters:       
     plt.plot(J_values,'ro')
     plt.xlabel('iterations')
     vert_label=plt.ylabel('J')
